@@ -3,401 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store Catalog | GSD Suppliers</title>
-    <!-- Icons & High-Tech Fonts -->
+    <title>Catalog & Store | GSD Suppliers</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-
+    
     <style>
         :root {
-            --bg: #040508;
-            --primary: #ffb800;
-            --card-bg: rgba(15, 17, 23, 0.85);
-            --accent-green: #00e676;
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --accent-cyan: #38bdf8;
+            --accent-amber: #f59e0b;
+            --accent-green: #22c55e;
+            --accent-purple: #a855f7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(56, 189, 248, 0.25);
         }
 
         * {
-            margin: 0; padding: 0; box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg);
-            color: #fff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             min-height: 100vh;
-            padding-bottom: 80px;
+            overflow-x: hidden;
         }
 
-        /* Particle Canvas */
-        #particleCanvas {
+        #particle-canvas {
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
             pointer-events: none;
         }
 
-        header {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             position: relative;
-            z-index: 10;
+            z-index: 1;
+        }
+
+        /* Navbar */
+        header {
+            padding: 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 8%;
-            background: rgba(8, 10, 15, 0.85);
-            backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            position: sticky;
-            top: 0;
+            backdrop-filter: blur(10px);
         }
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
+            font-size: 1.6rem;
             font-weight: 900;
-            letter-spacing: 1.5px;
+            color: var(--accent-cyan);
+            letter-spacing: 1px;
+            text-decoration: none;
         }
 
         .logo span {
-            color: var(--primary);
-            text-shadow: 0 0 12px rgba(255, 184, 0, 0.8);
+            color: var(--accent-amber);
         }
 
-        nav a {
-            color: #8a92a6;
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
             text-decoration: none;
-            margin-left: 30px;
             font-weight: 600;
-            transition: 0.3s;
+            transition: color 0.2s ease;
         }
 
-        nav a:hover, nav a.active {
-            color: var(--primary);
-            text-shadow: 0 0 8px rgba(255, 184, 0, 0.6);
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-cyan);
         }
 
-        .container {
-            position: relative;
-            z-index: 5;
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-
+        /* Catalog Section Header */
         .page-title {
             text-align: center;
+            margin: 40px 0 20px 0;
+        }
+
+        .page-title h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 38px;
-            margin-bottom: 45px;
-            letter-spacing: 1px;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #ffffff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .page-title span { color: var(--primary); }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 30px;
+        /* Category Filter Buttons */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
-        /* Cyber Neon Product Card */
-        .card {
-            background: var(--card-bg);
+        .filter-btn {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-glow);
+            color: var(--text-muted);
+            padding: 10px 20px;
             border-radius: 20px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            position: relative;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Products Grid */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.4s ease;
-            overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--primary);
-            box-shadow: 0 15px 35px rgba(255, 184, 0, 0.25);
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .tag {
-            background: rgba(255, 255, 255, 0.05);
+        .badge {
+            align-self: flex-start;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
             padding: 4px 10px;
-            border-radius: 6px;
-            color: #8a92a6;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
-
-        .status { color: var(--accent-green); }
-
-        .image-box {
-            height: 130px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .image-box i {
-            font-size: 55px;
-            transition: transform 0.3s;
-        }
-
-        .card:hover .image-box i {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        .icon-ff { color: #ff4757; filter: drop-shadow(0 0 15px rgba(255, 71, 87, 0.6)); }
-        .icon-pubg { color: #ffa502; filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.6)); }
-        .icon-ml { color: #2ed573; filter: drop-shadow(0 0 15px rgba(46, 213, 115, 0.6)); }
-        .icon-netflix { color: #e50914; filter: drop-shadow(0 0 15px rgba(229, 9, 20, 0.6)); }
 
         .card-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 18px;
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
             margin-bottom: 15px;
         }
 
-        select {
-            width: 100%;
-            padding: 12px;
-            background: #0d0f17;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 10px;
-            color: #fff;
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
             font-weight: 600;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
             outline: none;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: border-color 0.3s;
+            font-size: 0.9rem;
         }
 
-        select:focus { border-color: var(--primary); }
-
-        .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .price-label { font-size: 11px; color: #8a92a6; }
-        .price {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--primary);
+        .form-group select:focus, .form-group input:focus {
+            border-color: var(--accent-cyan);
         }
 
         .buy-btn {
-            background: var(--primary);
-            color: #000;
-            padding: 12px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 13px;
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-green), #16a34a);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 6px;
-            box-shadow: 0 0 15px rgba(255, 184, 0, 0.3);
-            transition: all 0.2s;
+            gap: 8px;
+            transition: transform 0.2s ease;
         }
 
         .buy-btn:hover {
-            background: #fff;
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
-    <canvas id="particleCanvas"></canvas>
-
-    <header>
-        <div class="logo">GSD <span>Suppliers</span></div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="products.html" class="active">Store Catalog</a>
-        </nav>
-    </header>
+    <canvas id="particle-canvas"></canvas>
 
     <div class="container">
-        <h1 class="page-title">SELECT YOUR <span>PACKAGE</span></h1>
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo">GSD <span>SUPPLIERS</span></a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link active">Store Catalog</a>
+            </nav>
+        </header>
 
-        <div class="products-grid">
+        <!-- Title -->
+        <div class="page-title">
+            <h1>ALL TOP-UP SERVICES</h1>
+            <p style="color: var(--text-muted);">Select your package, enter your details, and place your order instantly.</p>
+        </div>
 
-            <!-- FREE FIRE CARD -->
-            <div class="card">
+        <!-- Filter Controls -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterCategory('all')">All Products</button>
+            <button class="filter-btn" onclick="filterCategory('mobile-games')">Mobile Games</button>
+            <button class="filter-btn" onclick="filterCategory('subscriptions')">Subscriptions</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="catalog-grid">
+
+            <!-- Free Fire Card -->
+            <div class="product-card" data-category="mobile-games">
                 <div>
-                    <div class="card-header">
-                        <span class="tag">TOPUP</span>
-                        <span class="status"><i class="fa-solid fa-circle"></i> ONLINE</span>
+                    <span class="badge">Mobile Game</span>
+                    <div class="card-title"><i class="fa-solid fa-fire-flame-curated" style="color: #ef4444;"></i> Free Fire</div>
+                    <div class="form-group">
+                        <label>Select Package</label>
+                        <select id="ff-pkg">
+                            <option value="90">110 Diamonds - NPR 90</option>
+                            <option value="260">340 Diamonds - NPR 260</option>
+                            <option value="450">570 Diamonds - NPR 450</option>
+                            <option value="890">1140 Diamonds - NPR 890</option>
+                        </select>
                     </div>
-                    <div class="image-box">
-                        <i class="fa-solid fa-fire icon-ff"></i>
+                    <div class="form-group">
+                        <label>Player UID</label>
+                        <input type="text" id="ff-uid" placeholder="e.g. 123456789">
                     </div>
-                    <div class="card-title">Free Fire Diamond</div>
-                    <select id="ff-select" onchange="updatePrice('ff')">
-                        <option value="30">25 Diamonds</option>
-                        <option value="50">50 Diamonds</option>
-                        <option value="100">100 Diamonds</option>
-                        <option value="105">115 Diamonds</option>
-                        <option value="210">240 Diamonds</option>
-                        <option value="315">355 Diamonds</option>
-                        <option value="420">480 Diamonds</option>
-                        <option value="525">610 Diamonds</option>
-                        <option value="630">725 Diamonds</option>
-                        <option value="735">850 Diamonds</option>
-                        <option value="840">965 Diamonds</option>
-                        <option value="945">1090 Diamonds</option>
-                        <option value="1050">1240 Diamonds</option>
-                        <option value="1290">1505 Diamonds</option>
-                        <option value="1780">2090 Diamonds</option>
-                        <option value="2100">2530 Diamonds</option>
-                        <option value="2520">3010 Diamonds</option>
-                        <option value="4200">5060 Diamonds</option>
-                        <option value="5200">6300 Diamonds</option>
-                        <option value="8350">10120 Diamonds</option>
-                        <option value="60">Weekly Lite (90💎)</option>
-                        <option value="210">Weekly Pass (445💎)</option>
-                        <option value="1040">Monthly Pass (2500💎)</option>
-                        <option value="540">Level - Pass (1270💎)</option>
-                    </select>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="ff-phone" placeholder="e.g. 98XXXXXXXX">
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <div>
-                        <div class="price-label">PRICE</div>
-                        <div class="price" id="ff-price">Rs. 30</div>
-                    </div>
-                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">
-                        <i class="fa-solid fa-cart-shopping"></i> BUY NOW
-                    </a>
-                </div>
+                <button class="buy-btn" onclick="orderNow('Free Fire', 'ff-pkg', 'ff-uid', 'ff-phone')">
+                    <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+                </button>
             </div>
 
-            <!-- PUBG UC CARD -->
-            <div class="card">
+            <!-- PUBG Mobile Card -->
+            <div class="product-card" data-category="mobile-games">
                 <div>
-                    <div class="card-header">
-                        <span class="tag">TOPUP</span>
-                        <span class="status"><i class="fa-solid fa-circle"></i> ONLINE</span>
+                    <span class="badge">Mobile Game</span>
+                    <div class="card-title"><i class="fa-solid fa-crosshair" style="color: var(--accent-amber);"></i> PUBG Mobile</div>
+                    <div class="form-group">
+                        <label>Select Package</label>
+                        <select id="pubg-pkg">
+                            <option value="120">60 UC - NPR 120</option>
+                            <option value="600">325 UC - NPR 600</option>
+                            <option value="1200">660 UC - NPR 1200</option>
+                            <option value="3200">1800 UC - NPR 3200</option>
+                        </select>
                     </div>
-                    <div class="image-box">
-                        <i class="fa-solid fa-gun icon-pubg"></i>
+                    <div class="form-group">
+                        <label>Character ID (UID)</label>
+                        <input type="text" id="pubg-uid" placeholder="e.g. 512345678">
                     </div>
-                    <div class="card-title">PUBG Mobile UC</div>
-                    <select id="pubg-select" onchange="updatePrice('pubg')">
-                        <option value="150">60 UC</option>
-                        <option value="300">120 UC</option>
-                        <option value="600">240 UC</option>
-                        <option value="750">325 UC</option>
-                        <option value="1500">660 UC</option>
-                        <option value="1650">720 UC</option>
-                        <option value="3750">1800 UC</option>
-                        <option value="7500">3850 UC</option>
-                        <option value="14500">8100 UC</option>
-                        <option value="29000">16200 UC</option>
-                    </select>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="pubg-phone" placeholder="e.g. 98XXXXXXXX">
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <div>
-                        <div class="price-label">PRICE</div>
-                        <div class="price" id="pubg-price">Rs. 150</div>
-                    </div>
-                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">
-                        <i class="fa-solid fa-cart-shopping"></i> BUY NOW
-                    </a>
-                </div>
+                <button class="buy-btn" onclick="orderNow('PUBG Mobile', 'pubg-pkg', 'pubg-uid', 'pubg-phone')">
+                    <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+                </button>
             </div>
 
-            <!-- MOBILE LEGENDS CARD -->
-            <div class="card">
+            <!-- Mobile Legends Card -->
+            <div class="product-card" data-category="mobile-games">
                 <div>
-                    <div class="card-header">
-                        <span class="tag">TOPUP</span>
-                        <span class="status"><i class="fa-solid fa-circle"></i> ONLINE</span>
+                    <span class="badge">Mobile Game</span>
+                    <div class="card-title"><i class="fa-solid fa-shield-halved" style="color: var(--accent-cyan);"></i> Mobile Legends</div>
+                    <div class="form-group">
+                        <label>Select Package</label>
+                        <select id="ml-pkg">
+                            <option value="180">86 Diamonds - NPR 180</option>
+                            <option value="350">172 Diamonds - NPR 350</option>
+                            <option value="520">257 Diamonds - NPR 520</option>
+                            <option value="1400">706 Diamonds - NPR 1400</option>
+                        </select>
                     </div>
-                    <div class="image-box">
-                        <i class="fa-solid fa-shield-halved icon-ml"></i>
+                    <div class="form-group">
+                        <label>User ID & Zone ID</label>
+                        <input type="text" id="ml-uid" placeholder="e.g. 12345678 (1234)">
                     </div>
-                    <div class="card-title">Mobile Legends</div>
-                    <select id="ml-select" onchange="updatePrice('ml')">
-                        <option value="135">50 + 5 Diamonds (2X)</option>
-                        <option value="400">150 + 15 Diamonds (2X)</option>
-                        <option value="650">250 + 25 Diamonds (2X)</option>
-                        <option value="1340">500 + 65 Diamonds (2X)</option>
-                        <option value="220">86 Diamonds</option>
-                        <option value="440">172 Diamonds</option>
-                        <option value="600">257 Diamonds</option>
-                        <option value="1650">706 Diamonds</option>
-                        <option value="5080">2195 Diamonds</option>
-                        <option value="260">Weekly Pass</option>
-                        <option value="1400">Twilight Pass</option>
-                    </select>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="ml-phone" placeholder="e.g. 98XXXXXXXX">
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <div>
-                        <div class="price-label">PRICE</div>
-                        <div class="price" id="ml-price">Rs. 135</div>
-                    </div>
-                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">
-                        <i class="fa-solid fa-cart-shopping"></i> BUY NOW
-                    </a>
-                </div>
+                <button class="buy-btn" onclick="orderNow('Mobile Legends', 'ml-pkg', 'ml-uid', 'ml-phone')">
+                    <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+                </button>
             </div>
 
-            <!-- NETFLIX CARD -->
-            <div class="card">
+            <!-- Netflix Subscription Card -->
+            <div class="product-card" data-category="subscriptions">
                 <div>
-                    <div class="card-header">
-                        <span class="tag">PASS</span>
-                        <span class="status"><i class="fa-solid fa-circle"></i> ONLINE</span>
+                    <span class="badge" style="color: var(--accent-purple); background: rgba(168, 85, 247, 0.15);">Subscription</span>
+                    <div class="card-title"><i class="fa-solid fa-tv" style="color: #e50914;"></i> Netflix Screen</div>
+                    <div class="form-group">
+                        <label>Select Duration</label>
+                        <select id="netflix-pkg">
+                            <option value="350">1 Month Private Screen - NPR 350</option>
+                            <option value="950">3 Months Private Screen - NPR 950</option>
+                        </select>
                     </div>
-                    <div class="image-box">
-                        <i class="fa-solid fa-tv icon-netflix"></i>
+                    <div class="form-group">
+                        <label>Your Email / Name</label>
+                        <input type="text" id="netflix-uid" placeholder="Your name or email">
                     </div>
-                    <div class="card-title">Netflix Premium</div>
-                    <select id="netflix-select" onchange="updatePrice('netflix')">
-                        <option value="350">1 Month Premium (4K)</option>
-                        <option value="950">3 Months Premium (4K)</option>
-                    </select>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="netflix-phone" placeholder="e.g. 98XXXXXXXX">
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <div>
-                        <div class="price-label">PRICE</div>
-                        <div class="price" id="netflix-price">Rs. 350</div>
-                    </div>
-                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">
-                        <i class="fa-solid fa-cart-shopping"></i> BUY NOW
-                    </a>
-                </div>
+                <button class="buy-btn" onclick="orderNow('Netflix', 'netflix-pkg', 'netflix-uid', 'netflix-phone')">
+                    <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+                </button>
             </div>
 
         </div>
+
+        <footer>
+            <p>&copy; 2026 GSD Suppliers. All rights reserved.</p>
+        </footer>
     </div>
 
-    <!-- Interactive Price Update Script -->
     <script>
-        function updatePrice(id) {
-            var select = document.getElementById(id + '-select');
-            var price = document.getElementById(id + '-price');
-            price.innerText = "Rs. " + select.value;
-        }
-
-        // Particle Canvas Animation
-        const canvas = document.getElementById('particleCanvas');
+        // Particle Background Logic
+        const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
 
@@ -412,40 +403,80 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.color = 'rgba(255, 184, 0, ' + (Math.random() * 0.5 + 0.2) + ')';
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
             draw() {
-                ctx.fillStyle = this.color;
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 70; i++) {
-            particles.push(new Particle());
-        }
+        for (let i = 0; i < 50; i++) particles.push(new Particle());
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animate);
         }
         animate();
+
+        // Category Filter Function
+        function filterCategory(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // WhatsApp Checkout Submission
+        function orderNow(title, packageId, uidId, phoneId) {
+            const select = document.getElementById(packageId);
+            const packageText = select.options[select.selectedIndex].text;
+            const price = select.value;
+            const playerUID = document.getElementById(uidId).value.trim();
+            const customerPhone = document.getElementById(phoneId).value.trim();
+
+            if (!playerUID) {
+                alert('Please enter your Player UID or ID details.');
+                return;
+            }
+            if (!customerPhone) {
+                alert('Please enter your Phone Number.');
+                return;
+            }
+
+            const adminPhone = "9779743712703";
+            const message = 
+                `*NEW CATALOG ORDER - GSD SUPPLIERS*\n` +
+                `━━━━━━━━━━━━━━━━━━━━━━\n` +
+                `📦 *Item:* ${title}\n` +
+                `🏷️ *Option:* ${packageText}\n` +
+                `💰 *Price:* NPR ${price}\n` +
+                `🆔 *Account/UID:* ${playerUID}\n` +
+                `📱 *Customer Phone:* ${customerPhone}\n` +
+                `━━━━━━━━━━━━━━━━━━━━━━\n` +
+                `Please process my order!`;
+
+            window.open(`https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
     </script>
 </body>
 </html>
