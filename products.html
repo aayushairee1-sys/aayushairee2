@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalog & Store | GSD Suppliers</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>GSD TOPUP GHAR | All Products</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
-            --bg-color: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.75);
+            --bg-dark: #060911;
+            --card-bg: #0d1322;
+            --accent-gold: #fbbf24;
             --accent-cyan: #38bdf8;
-            --accent-amber: #f59e0b;
             --accent-green: #22c55e;
-            --accent-purple: #a855f7;
+            --accent-pubg: #f97316;
+            --accent-ml: #a855f7;
+            --accent-netflix: #e50914;
+            --accent-red: #ef4444;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-glow: rgba(56, 189, 248, 0.25);
+            --glow-gold: rgba(251, 191, 36, 0.25);
         }
 
         * {
@@ -29,125 +32,133 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
+            padding-bottom: 60px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1050px;
             margin: 0 auto;
             padding: 0 20px;
-            position: relative;
-            z-index: 1;
         }
 
-        /* Navbar */
+        /* Top Header */
         header {
-            padding: 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 22px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+            margin-bottom: 25px;
         }
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 900;
-            color: var(--accent-cyan);
-            letter-spacing: 1px;
+            color: var(--accent-gold);
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
 
-        .logo span {
-            color: var(--accent-amber);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
+        .logo span { color: var(--accent-cyan); }
 
         .nav-link {
             color: var(--text-muted);
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--accent-cyan);
-        }
-
-        /* Catalog Section Header */
-        .page-title {
-            text-align: center;
-            margin: 40px 0 20px 0;
-        }
-
-        .page-title h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            background: linear-gradient(135deg, #ffffff, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Category Filter Buttons */
-        .filter-container {
+            font-weight: 700;
+            font-size: 0.9rem;
             display: flex;
-            justify-content: center;
-            gap: 12px;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Controls Section */
+        .controls-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            margin-bottom: 40px;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 260px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px 16px 12px 42px;
+            border-radius: 12px;
+            color: #fff;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid var(--border-glow);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-muted);
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
             cursor: pointer;
-            font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .filter-btn.active, .filter-btn:hover {
-            background: var(--accent-cyan);
-            color: #000;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+            border-color: var(--accent-gold);
+            color: #fff;
+            background: rgba(251, 191, 36, 0.15);
         }
 
-        /* Products Grid */
+        /* Product Catalog Grid */
         .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
         }
 
         .product-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-glow);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 24px;
-            backdrop-filter: blur(12px);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -155,328 +166,533 @@
 
         .product-card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 25px var(--glow-gold);
         }
 
-        .badge {
-            align-self: flex-start;
-            background: rgba(56, 189, 248, 0.15);
-            color: var(--accent-cyan);
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-weight: 700;
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
             text-transform: uppercase;
-            margin-bottom: 12px;
         }
 
-        .card-title {
+        .badge-ff { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+        .badge-pubg { background: rgba(249, 115, 22, 0.15); color: var(--accent-pubg); border: 1px solid var(--accent-pubg); }
+        .badge-ml { background: rgba(168, 85, 247, 0.15); color: var(--accent-ml); border: 1px solid var(--accent-ml); }
+        .badge-netflix { background: rgba(229, 9, 20, 0.15); color: var(--accent-netflix); border: 1px solid var(--accent-netflix); }
+
+        .product-icon {
+            font-size: 2.2rem;
+            margin: 15px 0;
+        }
+
+        .product-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: #fff;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 8px;
         }
 
-        .form-group {
+        .product-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
             margin-bottom: 15px;
         }
 
-        .form-group label {
-            display: block;
+        .view-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-gold), #d97706);
+            color: #000;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 800;
             font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* Order Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-body {
+            background: #0d1322;
+            border: 1px solid var(--accent-gold);
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            max-width: 460px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 18px; right: 18px;
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-gold);
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
             color: var(--text-muted);
             margin-bottom: 6px;
             font-weight: 600;
         }
 
-        .form-group select, .form-group input {
+        .form-control, .form-select {
             width: 100%;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #fff;
-            padding: 10px;
+            padding: 11px;
             border-radius: 8px;
+            margin-bottom: 14px;
             outline: none;
             font-size: 0.9rem;
         }
 
-        .form-group select:focus, .form-group input:focus {
-            border-color: var(--accent-cyan);
+        .form-select option {
+            background: #0d1322;
+            color: #fff;
         }
 
-        .buy-btn {
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .qr-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .qr-img {
+            width: 180px;
+            height: auto;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .qr-warning {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--accent-red);
+            color: #fca5a5;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 8px;
+            line-height: 1.3;
+        }
+
+        .confirm-btn {
             width: 100%;
             background: linear-gradient(135deg, var(--accent-green), #16a34a);
             color: #fff;
             border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
-            transition: transform 0.2s ease;
         }
 
-        .buy-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
-            font-size: 0.85rem;
+        .error-msg {
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <canvas id="particle-canvas"></canvas>
-
     <div class="container">
         <!-- Header -->
         <header>
-            <a href="index.html" class="logo">GSD <span>SUPPLIERS</span></a>
-            <nav class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="products.html" class="nav-link active">Store Catalog</a>
-            </nav>
+            <a href="index.html" class="logo">GSD <span>TOPUP GHAR</span></a>
+            <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Back to Home</a>
         </header>
 
-        <!-- Title -->
-        <div class="page-title">
-            <h1>ALL TOP-UP SERVICES</h1>
-            <p style="color: var(--text-muted);">Select your package, enter your details, and place your order instantly.</p>
+        <!-- Search & Filter Controls -->
+        <div class="controls-bar">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search game or package...">
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-btn active" onclick="setFilter('all', this)">All Products</button>
+                <button class="filter-btn" onclick="setFilter('ff', this)">Free Fire</button>
+                <button class="filter-btn" onclick="setFilter('pubg', this)">PUBG Mobile</button>
+                <button class="filter-btn" onclick="setFilter('ml', this)">Mobile Legends</button>
+                <button class="filter-btn" onclick="setFilter('netflix', this)">Netflix</button>
+            </div>
         </div>
 
-        <!-- Filter Controls -->
-        <div class="filter-container">
-            <button class="filter-btn active" onclick="filterCategory('all')">All Products</button>
-            <button class="filter-btn" onclick="filterCategory('mobile-games')">Mobile Games</button>
-            <button class="filter-btn" onclick="filterCategory('subscriptions')">Subscriptions</button>
+        <!-- Catalog Grid -->
+        <div class="catalog-grid" id="catalogGrid"></div>
+    </div>
+
+    <!-- ORDER MODAL POPUP -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-body">
+            <i class="fa-solid fa-xmark close-modal" onclick="closeOrderModal()"></i>
+            
+            <div class="modal-title" id="modalProductTitle">Product Title</div>
+
+            <!-- Package Dropdown -->
+            <label class="form-label">Select Package *</label>
+            <select class="form-select" id="packageSelect" onchange="updatePrice()"></select>
+
+            <!-- Player UID -->
+            <label class="form-label" id="accountLabel">Player UID / Account Details *</label>
+            <input type="text" class="form-control" id="playerUIDInput" placeholder="Enter Player UID">
+
+            <!-- Payment QR Section -->
+            <div class="qr-section">
+                <div style="font-size: 0.9rem; color: var(--accent-gold); font-weight: bold;">
+                    Gauri Bhavani Kirana Pasal
+                </div>
+                <img src="qr.jpg" class="qr-img" alt="Payment QR Code">
+                
+                <div style="font-size: 1.1rem; font-weight: 800; color: #fff;" id="modalPrice">Amount: RS 0</div>
+
+                <div class="qr-warning">
+                    NOTE: Pasia Pathauda Affno Name Matra Lekhnu Hola Remarks Ma (natra kam hudaina)
+                </div>
+            </div>
+
+            <!-- Transaction ID Input -->
+            <label class="form-label">Transaction ID / Voucher No. *</label>
+            <input type="text" class="form-control" id="txnCodeInput" placeholder="e.g. 1A2B3C4D or 98XXXXXXXX">
+            
+            <div class="error-msg" id="txnErrorMsg">This Transaction ID has already been used!</div>
+
+            <!-- Action Button -->
+            <button class="confirm-btn" onclick="processOrder()">
+                <i class="fa-brands fa-whatsapp"></i> Send Order on WhatsApp
+            </button>
         </div>
-
-        <!-- Products Grid -->
-        <div class="catalog-grid">
-
-            <!-- Free Fire Card -->
-            <div class="product-card" data-category="mobile-games">
-                <div>
-                    <span class="badge">Mobile Game</span>
-                    <div class="card-title"><i class="fa-solid fa-fire-flame-curated" style="color: #ef4444;"></i> Free Fire</div>
-                    <div class="form-group">
-                        <label>Select Package</label>
-                        <select id="ff-pkg">
-                            <option value="90">110 Diamonds - NPR 90</option>
-                            <option value="260">340 Diamonds - NPR 260</option>
-                            <option value="450">570 Diamonds - NPR 450</option>
-                            <option value="890">1140 Diamonds - NPR 890</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Player UID</label>
-                        <input type="text" id="ff-uid" placeholder="e.g. 123456789">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="ff-phone" placeholder="e.g. 98XXXXXXXX">
-                    </div>
-                </div>
-                <button class="buy-btn" onclick="orderNow('Free Fire', 'ff-pkg', 'ff-uid', 'ff-phone')">
-                    <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
-                </button>
-            </div>
-
-            <!-- PUBG Mobile Card -->
-            <div class="product-card" data-category="mobile-games">
-                <div>
-                    <span class="badge">Mobile Game</span>
-                    <div class="card-title"><i class="fa-solid fa-crosshair" style="color: var(--accent-amber);"></i> PUBG Mobile</div>
-                    <div class="form-group">
-                        <label>Select Package</label>
-                        <select id="pubg-pkg">
-                            <option value="120">60 UC - NPR 120</option>
-                            <option value="600">325 UC - NPR 600</option>
-                            <option value="1200">660 UC - NPR 1200</option>
-                            <option value="3200">1800 UC - NPR 3200</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Character ID (UID)</label>
-                        <input type="text" id="pubg-uid" placeholder="e.g. 512345678">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="pubg-phone" placeholder="e.g. 98XXXXXXXX">
-                    </div>
-                </div>
-                <button class="buy-btn" onclick="orderNow('PUBG Mobile', 'pubg-pkg', 'pubg-uid', 'pubg-phone')">
-                    <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
-                </button>
-            </div>
-
-            <!-- Mobile Legends Card -->
-            <div class="product-card" data-category="mobile-games">
-                <div>
-                    <span class="badge">Mobile Game</span>
-                    <div class="card-title"><i class="fa-solid fa-shield-halved" style="color: var(--accent-cyan);"></i> Mobile Legends</div>
-                    <div class="form-group">
-                        <label>Select Package</label>
-                        <select id="ml-pkg">
-                            <option value="180">86 Diamonds - NPR 180</option>
-                            <option value="350">172 Diamonds - NPR 350</option>
-                            <option value="520">257 Diamonds - NPR 520</option>
-                            <option value="1400">706 Diamonds - NPR 1400</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>User ID & Zone ID</label>
-                        <input type="text" id="ml-uid" placeholder="e.g. 12345678 (1234)">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="ml-phone" placeholder="e.g. 98XXXXXXXX">
-                    </div>
-                </div>
-                <button class="buy-btn" onclick="orderNow('Mobile Legends', 'ml-pkg', 'ml-uid', 'ml-phone')">
-                    <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
-                </button>
-            </div>
-
-            <!-- Netflix Subscription Card -->
-            <div class="product-card" data-category="subscriptions">
-                <div>
-                    <span class="badge" style="color: var(--accent-purple); background: rgba(168, 85, 247, 0.15);">Subscription</span>
-                    <div class="card-title"><i class="fa-solid fa-tv" style="color: #e50914;"></i> Netflix Screen</div>
-                    <div class="form-group">
-                        <label>Select Duration</label>
-                        <select id="netflix-pkg">
-                            <option value="350">1 Month Private Screen - NPR 350</option>
-                            <option value="950">3 Months Private Screen - NPR 950</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Your Email / Name</label>
-                        <input type="text" id="netflix-uid" placeholder="Your name or email">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="netflix-phone" placeholder="e.g. 98XXXXXXXX">
-                    </div>
-                </div>
-                <button class="buy-btn" onclick="orderNow('Netflix', 'netflix-pkg', 'netflix-uid', 'netflix-phone')">
-                    <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
-                </button>
-            </div>
-
-        </div>
-
-        <footer>
-            <p>&copy; 2026 GSD Suppliers. All rights reserved.</p>
-        </footer>
     </div>
 
     <script>
-        // Particle Background Logic
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
+        // Master Products Catalog Data
+        const productsData = [
+            {
+                id: 'ff-diamonds',
+                category: 'ff',
+                name: 'Free Fire Diamonds',
+                subtitle: 'Direct UID Top-Up',
+                icon: 'fa-solid fa-gem',
+                iconColor: 'var(--accent-cyan)',
+                badgeClass: 'badge-ff',
+                badgeText: 'Free Fire',
+                packages: [
+                    { name: "25 Diamonds", price: 30 },
+                    { name: "50 Diamonds", price: 50 },
+                    { name: "100 Diamonds", price: 100 },
+                    { name: "115 Diamonds", price: 105 },
+                    { name: "240 Diamonds", price: 210 },
+                    { name: "355 Diamonds", price: 315 },
+                    { name: "480 Diamonds", price: 420 },
+                    { name: "610 Diamonds", price: 525 },
+                    { name: "725 Diamonds", price: 630 },
+                    { name: "850 Diamonds", price: 735 },
+                    { name: "965 Diamonds", price: 840 },
+                    { name: "1090 Diamonds", price: 945 },
+                    { name: "1240 Diamonds", price: 1050 },
+                    { name: "1505 Diamonds", price: 1290 },
+                    { name: "2090 Diamonds", price: 1780 },
+                    { name: "2530 Diamonds", price: 2100 },
+                    { name: "3010 Diamonds", price: 2520 },
+                    { name: "5060 Diamonds", price: 4200 },
+                    { name: "6300 Diamonds", price: 5200 },
+                    { name: "10120 Diamonds", price: 8350 }
+                ]
+            },
+            {
+                id: 'ff-passes',
+                category: 'ff',
+                name: 'Free Fire Passes',
+                subtitle: 'Weekly & Monthly Memberships',
+                icon: 'fa-solid fa-id-card',
+                iconColor: 'var(--accent-gold)',
+                badgeClass: 'badge-ff',
+                badgeText: 'Free Fire',
+                packages: [
+                    { name: "Weekly Lite (90💎)", price: 60 },
+                    { name: "Weekly (445💎)", price: 210 },
+                    { name: "Monthly (2500💎)", price: 1040 },
+                    { name: "Level-Up Pass (1270💎)", price: 540 }
+                ]
+            },
+            {
+                id: 'pubg-uc',
+                category: 'pubg',
+                name: 'PUBG Mobile UC',
+                subtitle: 'Unknown Cash Top-Up',
+                icon: 'fa-solid fa-crosshair',
+                iconColor: 'var(--accent-pubg)',
+                badgeClass: 'badge-pubg',
+                badgeText: 'PUBG Mobile',
+                packages: [
+                    { name: "60 UC", price: 160 },
+                    { name: "120 UC", price: 320 },
+                    { name: "240 UC", price: 640 },
+                    { name: "325 UC", price: 800 },
+                    { name: "660 UC", price: 1600 },
+                    { name: "720 UC", price: 1760 },
+                    { name: "1800 UC", price: 4000 },
+                    { name: "3850 UC", price: 8000 },
+                    { name: "8100 UC", price: 15467 },
+                    { name: "16200 UC", price: 30933 }
+                ]
+            },
+            {
+                id: 'ml-2xbonus',
+                category: 'ml',
+                name: 'MLBB 2X Bonus Diamonds',
+                subtitle: 'First Purchase Bonus Packs',
+                icon: 'fa-solid fa-bolt',
+                iconColor: 'var(--accent-ml)',
+                badgeClass: 'badge-ml',
+                badgeText: 'Mobile Legends',
+                packages: [
+                    { name: "50 + 5 Diamonds (2X Bonus)", price: 145 },
+                    { name: "150 + 15 Diamonds (2X Bonus)", price: 430 },
+                    { name: "250 + 25 Diamonds (2X Bonus)", price: 698 },
+                    { name: "500 + 65 Diamonds (2X Bonus)", price: 1439 }
+                ]
+            },
+            {
+                id: 'ml-normal',
+                category: 'ml',
+                name: 'MLBB Normal Diamonds',
+                subtitle: 'Standard Diamond Packages',
+                icon: 'fa-solid fa-gem',
+                iconColor: 'var(--accent-ml)',
+                badgeClass: 'badge-ml',
+                badgeText: 'Mobile Legends',
+                packages: [
+                    { name: "86 Diamonds", price: 236 },
+                    { name: "172 Diamonds", price: 473 },
+                    { name: "257 Diamonds", price: 644 },
+                    { name: "706 Diamonds", price: 1772 },
+                    { name: "2195 Diamonds", price: 5456 }
+                ]
+            },
+            {
+                id: 'ml-passes',
+                category: 'ml',
+                name: 'MLBB Weekly & Twilight Pass',
+                subtitle: 'Special In-Game Subscriptions',
+                icon: 'fa-solid fa-ticket',
+                iconColor: 'var(--accent-gold)',
+                badgeClass: 'badge-ml',
+                badgeText: 'Mobile Legends',
+                packages: [
+                    { name: "Weekly Pass", price: 279 },
+                    { name: "Twilight Pass", price: 1504 }
+                ]
+            },
+            {
+                id: 'netflix-sub',
+                category: 'netflix',
+                name: 'Netflix Premium',
+                subtitle: '4K Ultra HD Shared Screen',
+                icon: 'fa-solid fa-tv',
+                iconColor: 'var(--accent-netflix)',
+                badgeClass: 'badge-netflix',
+                badgeText: 'Netflix',
+                packages: [
+                    { name: "1 Month Screen", price: 360 },
+                    { name: "3 Month Screen", price: 970 }
+                ]
             }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+        ];
 
-        for (let i = 0; i < 50; i++) particles.push(new Particle());
+        let currentCategory = 'all';
+        let activeProduct = null;
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
+        // Render Catalog Cards
+        function renderCatalog() {
+            const container = document.getElementById('catalogGrid');
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            container.innerHTML = '';
 
-        // Category Filter Function
-        function filterCategory(category) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            productsData.forEach(product => {
+                const matchesCategory = (currentCategory === 'all' || product.category === currentCategory);
+                const matchesSearch = product.name.toLowerCase().includes(searchQuery) || product.subtitle.toLowerCase().includes(searchQuery);
 
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
+                if (matchesCategory && matchesSearch) {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <span class="product-badge ${product.badgeClass}">${product.badgeText}</span>
+                        <div class="product-icon"><i class="${product.icon}" style="color:${product.iconColor};"></i></div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-subtitle">${product.subtitle}</div>
+                        <button class="view-btn" onclick="openOrderModal('${product.id}')">View Rates & Buy</button>
+                    `;
+                    container.appendChild(card);
                 }
             });
         }
 
-        // WhatsApp Checkout Submission
-        function orderNow(title, packageId, uidId, phoneId) {
-            const select = document.getElementById(packageId);
-            const packageText = select.options[select.selectedIndex].text;
-            const price = select.value;
-            const playerUID = document.getElementById(uidId).value.trim();
-            const customerPhone = document.getElementById(phoneId).value.trim();
+        // Filter Handlers
+        function setFilter(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderCatalog();
+        }
 
-            if (!playerUID) {
-                alert('Please enter your Player UID or ID details.');
+        function filterProducts() {
+            renderCatalog();
+        }
+
+        // Modal Logic
+        function openOrderModal(productId) {
+            activeProduct = productsData.find(p => p.id === productId);
+            if (!activeProduct) return;
+
+            document.getElementById('modalProductTitle').innerText = activeProduct.name;
+            
+            // Build Dropdown Options
+            const select = document.getElementById('packageSelect');
+            select.innerHTML = '';
+            activeProduct.packages.forEach((pkg, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.innerText = `${pkg.name} - RS ${pkg.price.toLocaleString()}`;
+                select.appendChild(opt);
+            });
+
+            // Set Form Labels & Inputs according to product
+            const uidInput = document.getElementById('playerUIDInput');
+            const uidLabel = document.getElementById('accountLabel');
+
+            if (activeProduct.category === 'ml') {
+                uidLabel.innerText = "User ID & Zone ID *";
+                uidInput.placeholder = "e.g. 12345678 (1234)";
+            } else if (activeProduct.category === 'netflix') {
+                uidLabel.innerText = "Name / Phone Number *";
+                uidInput.placeholder = "Enter your Name or Contact Phone";
+            } else {
+                uidLabel.innerText = "Player UID / Character ID *";
+                uidInput.placeholder = "Enter Player UID";
+            }
+
+            uidInput.value = '';
+            document.getElementById('txnCodeInput').value = '';
+            document.getElementById('txnErrorMsg').style.display = 'none';
+
+            updatePrice();
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function updatePrice() {
+            const select = document.getElementById('packageSelect');
+            const selectedPkg = activeProduct.packages[select.value];
+            document.getElementById('modalPrice').innerText = `Amount: RS ${selectedPkg.price.toLocaleString()}`;
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Duplicate Check Storage
+        function getSavedTxnCodes() {
+            return JSON.parse(localStorage.getItem('gsd_used_txn') || '[]');
+        }
+
+        // Process WhatsApp Order
+        function processOrder() {
+            const select = document.getElementById('packageSelect');
+            const selectedPkg = activeProduct.packages[select.value];
+
+            const uid = document.getElementById('playerUIDInput').value.trim();
+            const txnCode = document.getElementById('txnCodeInput').value.trim().toUpperCase();
+            const errorElement = document.getElementById('txnErrorMsg');
+
+            if (!uid) {
+                alert("Please fill in your Player UID or Account Details!");
                 return;
             }
-            if (!customerPhone) {
-                alert('Please enter your Phone Number.');
+
+            if (!txnCode) {
+                alert("Please enter the Transaction ID / Voucher Code!");
                 return;
             }
+
+            // Verify unique transaction code
+            let savedCodes = getSavedTxnCodes();
+            if (savedCodes.includes(txnCode)) {
+                errorElement.innerText = "This Transaction ID has already been used!";
+                errorElement.style.display = "block";
+                return;
+            }
+
+            // Save new transaction code locally
+            savedCodes.push(txnCode);
+            localStorage.setItem('gsd_used_txn', JSON.stringify(savedCodes));
 
             const adminPhone = "9779743712703";
-            const message = 
-                `*NEW CATALOG ORDER - GSD SUPPLIERS*\n` +
-                `━━━━━━━━━━━━━━━━━━━━━━\n` +
-                `📦 *Item:* ${title}\n` +
-                `🏷️ *Option:* ${packageText}\n` +
-                `💰 *Price:* NPR ${price}\n` +
-                `🆔 *Account/UID:* ${playerUID}\n` +
-                `📱 *Customer Phone:* ${customerPhone}\n` +
-                `━━━━━━━━━━━━━━━━━━━━━━\n` +
-                `Please process my order!`;
 
-            window.open(`https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`, '_blank');
+            const message = 
+                `*NEW ORDER - GSD TOPUP GHAR*\n` +
+                `━━━━━━━━━━━━━━━━━━━━━━\n` +
+                `🎮 *Item:* ${activeProduct.name}\n` +
+                `📦 *Package:* ${selectedPkg.name}\n` +
+                `💰 *Amount:* RS ${selectedPkg.price.toLocaleString()}\n` +
+                `🆔 *Account/UID:* ${uid}\n` +
+                `🧾 *Transaction ID:* ${txnCode}\n` +
+                `━━━━━━━━━━━━━━━━━━━━━━\n` +
+                `Remarks verified with my name. Please complete my order!`;
+
+            const whatsappUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            closeOrderModal();
         }
+
+        // Initial Load
+        renderCatalog();
     </script>
 </body>
 </html>
