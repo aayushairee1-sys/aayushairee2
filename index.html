@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSD Suppliers | Premium Game Top-Up Store</title>
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>GSD TOPUP GHAR | Premium Store</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
-            --bg-color: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.75);
+            --bg-dark: #060911;
+            --card-bg: #0d1322;
+            --accent-gold: #fbbf24;
             --accent-cyan: #38bdf8;
-            --accent-amber: #f59e0b;
             --accent-green: #22c55e;
+            --accent-pubg: #f97316;
+            --accent-ml: #a855f7;
+            --accent-netflix: #e50914;
+            --accent-red: #ef4444;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-glow: rgba(56, 189, 248, 0.25);
+            --glow-gold: rgba(251, 191, 36, 0.25);
         }
 
         * {
@@ -28,386 +32,675 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            padding-bottom: 60px;
         }
 
-        /* Animated Canvas Background */
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Layout Container */
         .container {
-            max-width: 1200px;
+            max-width: 1050px;
             margin: 0 auto;
             padding: 0 20px;
-            position: relative;
-            z-index: 1;
         }
 
-        /* Header / Navbar */
+        /* Top Header */
         header {
-            padding: 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 22px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+            margin-bottom: 25px;
         }
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 900;
-            color: var(--accent-cyan);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
-        }
-
-        .logo span {
-            color: var(--accent-amber);
-        }
-
-        .contact-btn {
-            background: linear-gradient(135deg, var(--accent-amber), #d97706);
-            color: #000;
-            font-weight: 700;
-            padding: 10px 20px;
-            border-radius: 8px;
+            color: var(--accent-gold);
             text-decoration: none;
-            display: inline-flex;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span { color: var(--accent-cyan); }
+
+        .trust-badge {
+            font-size: 0.85rem;
+            color: var(--accent-green);
+            font-weight: 700;
+            background: rgba(34, 197, 94, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(251, 191, 36, 0.15) 0%, rgba(6, 9, 17, 0) 70%);
+            padding: 25px 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-banner h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+        }
+
+        .hero-banner p {
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-muted);
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
             align-items: center;
             gap: 8px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .contact-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+        .tab-btn:hover {
+            border-color: var(--accent-gold);
+            color: #fff;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 60px 0 40px 0;
+        .tab-btn.active-ff {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.05));
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
         }
 
-        .hero h1 {
+        .tab-btn.active-pubg {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.05));
+            border-color: var(--accent-pubg);
+            color: var(--accent-pubg);
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .tab-btn.active-ml {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.05));
+            border-color: var(--accent-ml);
+            color: var(--accent-ml);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .tab-btn.active-netflix {
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.2), rgba(229, 9, 20, 0.05));
+            border-color: var(--accent-netflix);
+            color: var(--accent-netflix);
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
+        }
+
+        /* Section Titles */
+        .section-header {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #ffffff, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Products Section */
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            margin: 40px 0 20px 0;
-            color: var(--accent-amber);
+            font-size: 1.2rem;
+            color: #fff;
+            margin: 25px 0 16px 0;
             display: flex;
             align-items: center;
             gap: 10px;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 12px;
         }
 
-        .products-grid {
+        /* Item Grid & Cards */
+        .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 16px;
         }
 
-        /* Cyberpunk Card Component */
-        .card {
+        .item-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 16px;
-            padding: 24px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+        .item-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        .card-header {
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 25px var(--glow-gold);
+        }
+
+        .item-card:hover::before {
+            opacity: 1;
+        }
+
+        .item-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.05rem;
+            color: #fff;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .card-header i {
-            font-size: 1.8rem;
-            color: var(--accent-cyan);
+        .item-price {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
         }
 
-        .card-header h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: #fff;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
+        .buy-now-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-gold), #d97706);
+            color: #000;
+            border: none;
+            padding: 9px;
+            border-radius: 8px;
+            font-weight: 800;
             font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* Order Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-body {
+            background: #0d1322;
+            border: 1px solid var(--accent-gold);
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 18px; right: 18px;
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-gold);
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
             color: var(--text-muted);
             margin-bottom: 6px;
             font-weight: 600;
         }
 
-        .form-group select, 
-        .form-group input {
+        .form-control {
             width: 100%;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #fff;
-            padding: 12px;
+            padding: 11px;
             border-radius: 8px;
+            margin-bottom: 14px;
             outline: none;
-            font-size: 0.95rem;
-            transition: border-color 0.2s ease;
+            font-size: 0.9rem;
         }
 
-        .form-group select:focus, 
-        .form-group input:focus {
-            border-color: var(--accent-cyan);
+        .form-control:focus {
+            border-color: var(--accent-gold);
         }
 
-        .buy-btn {
+        .qr-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .qr-img {
+            width: 190px;
+            height: auto;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .qr-warning {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--accent-red);
+            color: #fca5a5;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 8px;
+            line-height: 1.3;
+        }
+
+        .confirm-btn {
             width: 100%;
             background: linear-gradient(135deg, var(--accent-green), #16a34a);
             color: #fff;
             border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-weight: 700;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: 800;
             font-size: 1rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin-top: 10px;
+            gap: 8px;
         }
 
-        .buy-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
-            font-size: 0.85rem;
+        .error-msg {
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- Particle Background -->
-    <canvas id="particle-canvas"></canvas>
-
     <div class="container">
         <!-- Header -->
         <header>
-            <div class="logo">GSD <span>SUPPLIERS</span></div>
-            <a href="https://wa.me/9779743712703" target="_blank" class="contact-btn">
-                <i class="fa-brands fa-whatsapp"></i> Direct Help
-            </a>
+            <a href="#" class="logo">GSD <span>TOPUP GHAR</span></a>
+            <div class="trust-badge">
+                <i class="fa-solid fa-shield-halved"></i> 100% Safe & Instant
+            </div>
         </header>
 
-        <!-- Hero -->
-        <section class="hero">
-            <h1>INSTANT IN-GAME TOP-UPS</h1>
-            <p>Fast, reliable, and automated delivery for Free Fire, PUBG Mobile, and more.</p>
-        </section>
-
-        <!-- Catalog -->
-        <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> Choose Your Game</h2>
-        
-        <div class="products-grid">
-
-            <!-- Free Fire Box -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-fire-flame-curated" style="color: #ef4444;"></i>
-                    <h3>Free Fire Diamonds</h3>
-                </div>
-                <div class="form-group">
-                    <label>Select Package</label>
-                    <select id="ff-package">
-                        <option value="90">110 Diamonds - NPR 90</option>
-                        <option value="260">340 Diamonds - NPR 260</option>
-                        <option value="450">570 Diamonds - NPR 450</option>
-                        <option value="890">1140 Diamonds - NPR 890</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Player UID</label>
-                    <input type="text" id="ff-uid" placeholder="e.g. 123456789">
-                </div>
-                <div class="form-group">
-                    <label>Your Phone Number</label>
-                    <input type="tel" id="ff-phone" placeholder="e.g. 98XXXXXXXX">
-                </div>
-                <button class="buy-btn" onclick="submitOrder('Free Fire', 'ff-package', 'ff-uid', 'ff-phone')">
-                    <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
-                </button>
-            </div>
-
-            <!-- PUBG Mobile Box -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-crosshair" style="color: var(--accent-amber);"></i>
-                    <h3>PUBG Mobile UC</h3>
-                </div>
-                <div class="form-group">
-                    <label>Select Package</label>
-                    <select id="pubg-package">
-                        <option value="120">60 UC - NPR 120</option>
-                        <option value="600">325 UC - NPR 600</option>
-                        <option value="1200">660 UC - NPR 1200</option>
-                        <option value="3200">1800 UC - NPR 3200</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Character ID (UID)</label>
-                    <input type="text" id="pubg-uid" placeholder="e.g. 512345678">
-                </div>
-                <div class="form-group">
-                    <label>Your Phone Number</label>
-                    <input type="tel" id="pubg-phone" placeholder="e.g. 98XXXXXXXX">
-                </div>
-                <button class="buy-btn" onclick="submitOrder('PUBG Mobile', 'pubg-package', 'pubg-uid', 'pubg-phone')">
-                    <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
-                </button>
-            </div>
-
+        <!-- Hero Section -->
+        <div class="hero-banner">
+            <h1>OFFICIAL STORE CATALOG</h1>
+            <p><i class="fa-solid fa-bolt" style="color:var(--accent-gold);"></i> Instant Delivery • Direct WhatsApp Checkout</p>
         </div>
 
-        <footer>
-            <p>&copy; 2026 GSD Suppliers. All rights reserved.</p>
-        </footer>
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <button class="tab-btn active-ff" id="tab-ff" onclick="switchCategory('ff')">
+                <i class="fa-solid fa-fire" style="color:var(--accent-cyan);"></i> Free Fire
+            </button>
+            <button class="tab-btn" id="tab-pubg" onclick="switchCategory('pubg')">
+                <i class="fa-solid fa-crosshair" style="color:var(--accent-pubg);"></i> PUBG Mobile
+            </button>
+            <button class="tab-btn" id="tab-ml" onclick="switchCategory('ml')">
+                <i class="fa-solid fa-shield-halved" style="color:var(--accent-ml);"></i> Mobile Legends
+            </button>
+            <button class="tab-btn" id="tab-netflix" onclick="switchCategory('netflix')">
+                <i class="fa-solid fa-tv" style="color:var(--accent-netflix);"></i> Netflix
+            </button>
+        </div>
+
+        <!-- FREE FIRE SECTION -->
+        <div id="section-ff">
+            <div class="section-header">
+                <i class="fa-solid fa-gem" style="color:var(--accent-cyan);"></i> Diamond Packages
+            </div>
+            <div class="items-grid" id="ff-diamonds-grid"></div>
+
+            <div class="section-header">
+                <i class="fa-solid fa-id-card" style="color:var(--accent-gold);"></i> Memberships & Passes
+            </div>
+            <div class="items-grid" id="ff-passes-grid"></div>
+        </div>
+
+        <!-- PUBG MOBILE SECTION -->
+        <div id="section-pubg" style="display: none;">
+            <div class="section-header">
+                <i class="fa-solid fa-crosshair" style="color:var(--accent-pubg);"></i> Unknown Cash (UC)
+            </div>
+            <div class="items-grid" id="pubg-uc-grid"></div>
+        </div>
+
+        <!-- MOBILE LEGENDS SECTION -->
+        <div id="section-ml" style="display: none;">
+            <div class="section-header">
+                <i class="fa-solid fa-bolt" style="color:var(--accent-ml);"></i> 2X Bonus Diamonds
+            </div>
+            <div class="items-grid" id="ml-bonus-grid"></div>
+
+            <div class="section-header">
+                <i class="fa-solid fa-gem" style="color:var(--accent-ml);"></i> Normal Diamonds
+            </div>
+            <div class="items-grid" id="ml-normal-grid"></div>
+
+            <div class="section-header">
+                <i class="fa-solid fa-ticket" style="color:var(--accent-gold);"></i> Passes & Subscriptions
+            </div>
+            <div class="items-grid" id="ml-passes-grid"></div>
+        </div>
+
+        <!-- NETFLIX SECTION -->
+        <div id="section-netflix" style="display: none;">
+            <div class="section-header">
+                <i class="fa-solid fa-tv" style="color:var(--accent-netflix);"></i> Premium Subscriptions
+            </div>
+            <div class="items-grid" id="netflix-grid"></div>
+        </div>
     </div>
 
-    <!-- Script Section -->
+    <!-- ORDER MODAL POPUP -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-body">
+            <i class="fa-solid fa-xmark close-modal" onclick="closeOrderModal()"></i>
+            
+            <div class="modal-title" id="modalItemTitle">Order Details</div>
+
+            <!-- Player UID -->
+            <label class="form-label" id="accountLabel">Player UID / Account Details *</label>
+            <input type="text" class="form-control" id="playerUIDInput" placeholder="Enter Player UID / ID (Zone ID)">
+
+            <!-- Payment QR Section -->
+            <div class="qr-section">
+                <div style="font-size: 0.9rem; color: var(--accent-gold); font-weight: bold;">
+                    Gauri Bhavani Kirana Pasal
+                </div>
+                <img src="qr.jpg" class="qr-img" alt="Payment QR Code">
+                
+                <div style="font-size: 1rem; font-weight: 800; color: #fff;" id="modalPrice">Amount: RS 0</div>
+
+                <div class="qr-warning">
+                    NOTE: Pasia Pathauda Affno Name Matra Lekhnu Hola Remarks Ma (natra kam hudaina)
+                </div>
+            </div>
+
+            <!-- Transaction ID Input -->
+            <label class="form-label">Transaction ID / Voucher No. *</label>
+            <input type="text" class="form-control" id="txnCodeInput" placeholder="e.g. 1A2B3C4D or 98XXXXXXXX">
+            
+            <div class="error-msg" id="txnErrorMsg">This Transaction ID has already been used!</div>
+
+            <!-- Action Button -->
+            <button class="confirm-btn" onclick="processOrder()">
+                <i class="fa-brands fa-whatsapp"></i> Send Order on WhatsApp
+            </button>
+        </div>
+    </div>
+
     <script>
-        // 1. Particle Canvas Background Effect
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        // Free Fire Rates
+        const ffDiamondRates = [
+            { name: "25 Diamonds", price: 30 },
+            { name: "50 Diamonds", price: 50 },
+            { name: "100 Diamonds", price: 100 },
+            { name: "115 Diamonds", price: 105 },
+            { name: "240 Diamonds", price: 210 },
+            { name: "355 Diamonds", price: 315 },
+            { name: "480 Diamonds", price: 420 },
+            { name: "610 Diamonds", price: 525 },
+            { name: "725 Diamonds", price: 630 },
+            { name: "850 Diamonds", price: 735 },
+            { name: "965 Diamonds", price: 840 },
+            { name: "1090 Diamonds", price: 945 },
+            { name: "1240 Diamonds", price: 1050 },
+            { name: "1505 Diamonds", price: 1290 },
+            { name: "2090 Diamonds", price: 1780 },
+            { name: "2530 Diamonds", price: 2100 },
+            { name: "3010 Diamonds", price: 2520 },
+            { name: "5060 Diamonds", price: 4200 },
+            { name: "6300 Diamonds", price: 5200 },
+            { name: "10120 Diamonds", price: 8350 }
+        ];
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        const ffPassesRates = [
+            { name: "Weekly Lite (90💎)", price: 60 },
+            { name: "Weekly (445💎)", price: 210 },
+            { name: "Monthly (2500💎)", price: 1040 },
+            { name: "Level-Up Pass (1270💎)", price: 540 }
+        ];
+
+        // PUBG Mobile Rates
+        const pubgUcRates = [
+            { name: "60 UC", price: 160 },
+            { name: "120 UC", price: 320 },
+            { name: "240 UC", price: 640 },
+            { name: "325 UC", price: 800 },
+            { name: "660 UC", price: 1600 },
+            { name: "720 UC", price: 1760 },
+            { name: "1800 UC", price: 4000 },
+            { name: "3850 UC", price: 8000 },
+            { name: "8100 UC", price: 15467 },
+            { name: "16200 UC", price: 30933 }
+        ];
+
+        // Mobile Legends Rates
+        const ml2xBonusRates = [
+            { name: "50 + 5 Diamonds (2X Bonus)", price: 145 },
+            { name: "150 + 15 Diamonds (2X Bonus)", price: 430 },
+            { name: "250 + 25 Diamonds (2X Bonus)", price: 698 },
+            { name: "500 + 65 Diamonds (2X Bonus)", price: 1439 }
+        ];
+
+        const mlNormalRates = [
+            { name: "86 Diamonds", price: 236 },
+            { name: "172 Diamonds", price: 473 },
+            { name: "257 Diamonds", price: 644 },
+            { name: "706 Diamonds", price: 1772 },
+            { name: "2195 Diamonds", price: 5456 }
+        ];
+
+        const mlPassesRates = [
+            { name: "Weekly Pass", price: 279 },
+            { name: "Twilight Pass", price: 1504 }
+        ];
+
+        // Netflix Premium Rates
+        const netflixRates = [
+            { name: "1 Month Screen", price: 360 },
+            { name: "3 Month Screen", price: 970 }
+        ];
+
+        let selectedGame = "Free Fire";
+        let selectedItem = { name: '', price: 0 };
+
+        // Render Cards Helper
+        function renderGrid(data, containerId, iconClass, iconColor) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.onclick = () => openOrderModal(item.name, item.price);
+                card.innerHTML = `
+                    <div class="item-title"><i class="${iconClass}" style="color:${iconColor};"></i> ${item.name}</div>
+                    <div class="item-price">RS ${item.price.toLocaleString()}</div>
+                    <button class="buy-now-btn">Buy Now</button>
+                `;
+                container.appendChild(card);
+            });
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
+        // Initial Grid Renders
+        renderGrid(ffDiamondRates, 'ff-diamonds-grid', 'fa-solid fa-gem', 'var(--accent-cyan)');
+        renderGrid(ffPassesRates, 'ff-passes-grid', 'fa-solid fa-id-card', 'var(--accent-gold)');
+        renderGrid(pubgUcRates, 'pubg-uc-grid', 'fa-solid fa-crosshair', 'var(--accent-pubg)');
+        renderGrid(ml2xBonusRates, 'ml-bonus-grid', 'fa-solid fa-bolt', 'var(--accent-ml)');
+        renderGrid(mlNormalRates, 'ml-normal-grid', 'fa-solid fa-gem', 'var(--accent-ml)');
+        renderGrid(mlPassesRates, 'ml-passes-grid', 'fa-solid fa-ticket', 'var(--accent-gold)');
+        renderGrid(netflixRates, 'netflix-grid', 'fa-solid fa-tv', 'var(--accent-netflix)');
+
+        // Switch Tabs
+        function switchCategory(cat) {
+            const tabs = {
+                ff: document.getElementById('tab-ff'),
+                pubg: document.getElementById('tab-pubg'),
+                ml: document.getElementById('tab-ml'),
+                netflix: document.getElementById('tab-netflix')
+            };
+
+            const sections = {
+                ff: document.getElementById('section-ff'),
+                pubg: document.getElementById('section-pubg'),
+                ml: document.getElementById('section-ml'),
+                netflix: document.getElementById('section-netflix')
+            };
+
+            for (let key in tabs) {
+                tabs[key].className = "tab-btn";
+                sections[key].style.display = "none";
             }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+            if (cat === 'ff') {
+                selectedGame = "Free Fire";
+                tabs.ff.className = "tab-btn active-ff";
+            } else if (cat === 'pubg') {
+                selectedGame = "PUBG Mobile";
+                tabs.pubg.className = "tab-btn active-pubg";
+            } else if (cat === 'ml') {
+                selectedGame = "Mobile Legends";
+                tabs.ml.className = "tab-btn active-ml";
+            } else if (cat === 'netflix') {
+                selectedGame = "Netflix Premium";
+                tabs.netflix.className = "tab-btn active-netflix";
             }
-            draw() {
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+
+            sections[cat].style.display = "block";
         }
 
-        for (let i = 0; i < 50; i++) particles.push(new Particle());
+        // Open Modal
+        function openOrderModal(itemName, itemPrice) {
+            selectedItem = { name: itemName, price: itemPrice };
+            document.getElementById('modalItemTitle').innerText = `${selectedGame} - ${itemName}`;
+            document.getElementById('modalPrice').innerText = `Amount: RS ${itemPrice.toLocaleString()}`;
+            
+            const uidInput = document.getElementById('playerUIDInput');
+            const uidLabel = document.getElementById('accountLabel');
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
+            if (selectedGame === "Mobile Legends") {
+                uidLabel.innerText = "User ID & Zone ID *";
+                uidInput.placeholder = "e.g. 12345678 (1234)";
+            } else if (selectedGame === "Netflix Premium") {
+                uidLabel.innerText = "Name / Phone Number *";
+                uidInput.placeholder = "Enter your Name or Contact Phone";
+            } else {
+                uidLabel.innerText = "Player UID / Character ID *";
+                uidInput.placeholder = "Enter Player UID";
+            }
+
+            uidInput.value = '';
+            document.getElementById('txnCodeInput').value = '';
+            document.getElementById('txnErrorMsg').style.display = 'none';
+
+            document.getElementById('orderModal').style.display = 'flex';
         }
-        animate();
 
-        // 2. WhatsApp Order Submission Handler
-        function submitOrder(gameName, packageId, uidId, phoneId) {
-            const packageSelect = document.getElementById(packageId);
-            const selectedOption = packageSelect.options[packageSelect.selectedIndex];
-            const itemPackage = selectedOption.text;
-            const price = selectedOption.value;
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
 
-            const playerUID = document.getElementById(uidId).value.trim();
-            const customerPhone = document.getElementById(phoneId).value.trim();
+        // Duplicate Check Storage
+        function getSavedTxnCodes() {
+            return JSON.parse(localStorage.getItem('gsd_used_txn') || '[]');
+        }
 
-            if (!playerUID) {
-                alert('Please enter your Player UID / User ID!');
+        // Send Order to WhatsApp
+        function processOrder() {
+            const uid = document.getElementById('playerUIDInput').value.trim();
+            const txnCode = document.getElementById('txnCodeInput').value.trim().toUpperCase();
+            const errorElement = document.getElementById('txnErrorMsg');
+
+            if (!uid) {
+                alert("Please enter your Player UID / Account Details!");
                 return;
             }
 
-            if (!customerPhone) {
-                alert('Please enter your Phone Number!');
+            if (!txnCode) {
+                alert("Please enter the Transaction ID / Voucher Code!");
                 return;
             }
 
-            // Target Admin WhatsApp Number
+            // Verify unique transaction code
+            let savedCodes = getSavedTxnCodes();
+            if (savedCodes.includes(txnCode)) {
+                errorElement.innerText = "This Transaction ID has already been used!";
+                errorElement.style.display = "block";
+                return;
+            }
+
+            // Save new code
+            savedCodes.push(txnCode);
+            localStorage.setItem('gsd_used_txn', JSON.stringify(savedCodes));
+
             const adminPhone = "9779743712703";
 
-            // Structured Message
             const message = 
-                `*NEW ORDER - GSD SUPPLIERS*\n` +
+                `*NEW ORDER - GSD TOPUP GHAR*\n` +
                 `━━━━━━━━━━━━━━━━━━━━━━\n` +
-                `🎮 *Game:* ${gameName}\n` +
-                `📦 *Package:* ${itemPackage}\n` +
-                `💰 *Amount:* NPR ${price}\n` +
-                `🆔 *Player UID:* ${playerUID}\n` +
-                `📱 *Customer Phone:* ${customerPhone}\n` +
+                `🎮 *Item:* ${selectedGame}\n` +
+                `📦 *Package:* ${selectedItem.name}\n` +
+                `💰 *Amount:* RS ${selectedItem.price.toLocaleString()}\n` +
+                `🆔 *Account/UID:* ${uid}\n` +
+                `🧾 *Transaction ID:* ${txnCode}\n` +
                 `━━━━━━━━━━━━━━━━━━━━━━\n` +
-                `Please confirm my order and share the payment QR/details!`;
+                `Remarks verified with my name. Please complete my order!`;
 
             const whatsappUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+            closeOrderModal();
         }
     </script>
 </body>
